@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo 1 - Rive</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <!-- Canva template elements -->
+    <header>
+        <img class="menu" src="https://assets.codepen.io/t-14648/menu.png"/>
+        <img class="profile" src="https://assets.codepen.io/t-14648/profile.png"/>
+    </header>
+    
+    <div class="control-panel">
+        <img src="https://assets.codepen.io/t-14648/control-panel-shapes.png"/>
+    </div>
+    
+    <div class="sidebar-panel">
+        <img src="https://assets.codepen.io/t-14648/sidebar-panel-shapes.png"/>
+        <div class="sliders">
+            <label for="loadTime">Loading time</label>
+            <div class="slider">
+                <input type="range" id="loadTime" min="300" max="10000" value="1000"/>
+                <span id="loadTimeValue" class="slider-value">1000</span>
+            </div>
+        </div>
+        <!-- Button used to start the loader -->
+        <button class="load-button" id="load-button">Start loading</button>
+    </div>
+    
+    <div class="sidebar"></div>
+    
+    <img src="https://assets.codepen.io/t-14648/bottom-left_1.png" class="bottom-left"/>
+    
+    <footer>
+        <img class="notes" src="https://assets.codepen.io/t-14648/notes.png"/>
+        <img class="page" src="https://assets.codepen.io/t-14648/page.png"/>
+    </footer>
+
+    <!-- Loader elements -->
+    <div class="load-bg blur" id="load-bg">
+        <div id="rive-container"></div>
+        <div class="load-header" id="load-header">Loading...</div>
+    </div>
+
+    <script src="https://unpkg.com/@rive-app/canvas@2.9.1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+    <script src="scripts/index.js"></script>
+</body>
+</html>
