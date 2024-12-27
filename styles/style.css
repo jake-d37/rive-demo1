@@ -1,3 +1,13 @@
+@font-face {
+    font-family: "Canva Sans Medium";
+    src: url("https://assets.codepen.io/t-14648/canva-sans-medium.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Canva Sans";
+    src: url("https://assets.codepen.io/t-14648/canva-sans.woff2") format("woff2");
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -45,17 +55,6 @@ header img {
     height: auto;
     display: block;
 }
-
-@font-face {
-    font-family: "Canva Sans Medium";
-    src: url("https://assets.codepen.io/t-14648/canva-sans-medium.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: "Canva Sans";
-    src: url("https://assets.codepen.io/t-14648/canva-sans.woff2") format("woff2");
-}
-
 
 .canva-sans-bold {
     font-family: "Canva Sans Bold";
