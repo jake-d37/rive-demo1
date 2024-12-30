@@ -1,0 +1,272 @@
+@font-face {
+    font-family: "Canva Sans Medium";
+    src: url("https://assets.codepen.io/t-14648/canva-sans-medium.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Canva Sans";
+    src: url("https://assets.codepen.io/t-14648/canva-sans.woff2") format("woff2");
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: url("https://assets.codepen.io/t-14648/dot.png") repeat top left;
+    background-size: 18px 16px;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "Canva Sans";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+
+}
+
+header {
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url("https://assets.codepen.io/t-14648/gradient.png") no-repeat top left;
+    background-size: 100% 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+img {
+    display: block;
+}
+
+header .menu {
+    width: 471px;
+    margin-left: 30px;
+}
+
+header .profile {
+    width: 465px;
+    margin-right: 6px;
+}
+
+header img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.control-panel img,
+.sidebar-panel img {
+    width: 100%;
+    height: auto;
+}
+
+.sidebar-panel {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 126px;
+    left: 89px;
+    width: 350px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    border-radius: 12px;
+    padding: 2px 4px;
+    background-color: #fff;
+    overflow: auto;
+    height: calc(100vh - 200px);
+}
+
+.sidebar {
+    position: absolute;
+    width: 84px;
+    height: 100vh;
+    /* background-color: #fff; */
+    /* border-right: 1px solid #e2e4e7; */
+    background: url("https://assets.codepen.io/t-14648/sidebar-collapsed_1.png") no-repeat top left,
+        url("https://assets.codepen.io/t-14648/sidebar-piece.png") repeat-y top left;
+    background-size: 84px auto;
+    background-position: 1px 1px;
+    top: 60px;
+    left: 0;
+    z-index: 2;
+}
+
+.bottom-left {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    display: block;
+    width: 249px;
+    height: auto;
+    z-index: 4;
+}
+
+.control-panel {
+    width: 890px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 70px;
+    background-color: white;
+    border: 1px solid #f0f1f3;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 2px 4px;
+    z-index: 10;
+    display: flex;
+    margin-left: 42px;
+}
+
+.control-panel .shape-menu-left {
+    width: 169.5px;
+}
+
+.control-panel .shape-menu-right {
+    width: 810.5px;
+}
+
+.control-panel img {
+    width: 100%;
+    height: auto;
+}
+
+.sliders {
+    padding: 6px;
+    margin-top: 1rem;
+}
+
+.slider {
+    display: flex;
+}
+
+.slider-value {
+    border: 1px solid #D7DADE;
+    border-radius: 8px;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+label {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+input[type=range] {
+    width: 100%;
+    box-sizing: border-box;
+    margin-right: 10px;
+}
+
+.popup.visible {
+    visibility: visible;
+}
+
+.corner-rounding-popup.popup {
+    left: 80px;
+}
+
+.num-points-popup.popup {
+    left: 110px;
+}
+
+.point-thickness-popup.popup {
+    left: 140px;
+}
+
+.popup label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.shapes {
+    position: absolute;
+    top: 80px;
+    left: 100px;
+    z-index: 2;
+    color: #fff;
+    display: flex;
+}
+
+.shape-button {
+    width: 70px;
+    margin-right: 10px;
+}
+
+.shape-button img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+footer {
+    width: calc(100vw - 249px);
+    position: absolute;
+    height: 40px;
+    bottom: 0;
+    left: 249px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    background-color: #f6f7f8;
+    border-top: 1px solid #e2e4e7;
+}
+
+footer .notes {
+    width: 162px;
+    margin-left: 10px;
+    margin-top: 1px;
+    mix-blend-mode: multiply;
+}
+
+footer .page {
+    width: 491px;
+    margin-top: -1px;
+    margin-right: 10px;
+    mix-blend-mode: multiply;
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+}
+
+.tooltip {
+    cursor: pointer;
+    position: relative;
+}
+
+.tooltip .tooltiptext {
+    display: none;
+    width: 108px;
+    background-color: #0e1216;
+    color: #e1e1e1;
+    text-align: center;
+    padding: 7px 5px;
+    border-radius: 8px;
+    position: absolute;
+    z-index: 20;
+    font-size: 12px;
+    font-family: "Canva Sans Medium";
+    top: 50px;
+    left: -43px;
+}
+
+.tooltip:hover .tooltiptext {
+    display: block;
+}
+
+.tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+    z-index: 20;
+}

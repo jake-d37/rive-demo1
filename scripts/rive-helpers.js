@@ -6,7 +6,12 @@ export function createRiveInstance(src, canvas, stateMachines, canvasContainer) 
         canvas: canvas,
         autoplay: true,
         stateMachines: stateMachines,
+        onLoad: () => {
+            console.log("Rive instance loaded");
+        },
     });
+
+    resizeCanvas(canvas, canvasContainer, r)
 
     //check when animation over to call the cleanup
     r.on('stop', () => {
@@ -23,19 +28,19 @@ export function createRiveInstance(src, canvas, stateMachines, canvasContainer) 
 //resizes canvas and rive element to window
 export function resizeCanvas(canvas, container, riveInstance){
     //resize parent
-    console.log("resizing canvas parent");
-    if (container) {
+    /*if (container) {
         //THIS WILL DO THE ENTIRE SCREEN
         container.width = window.innerWidth;
         container.height = window.innerHeight;
-    }
+    }*/
 
     //resize canvas itself
-    console.log("resizing canvas");
     if (canvas){
+        const desiredSideLength = 401;
         const scale = 5; //ensures canvas isn't pixelated
-        canvas.width = container.offsetWidth * scale;
-        canvas.height = container.offsetHeight * scale;
+        canvas.width = desiredSideLength * scale;
+        canvas.height = desiredSideLength * scale;
+        console.log(`w:${canvas.width}, h:${canvas.height}`);
     }
 
     //resize rive instance

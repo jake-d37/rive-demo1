@@ -21,12 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let canvas = document.createElement('canvas');
     canvas.classList.add("canvas");
     container.appendChild(canvas);
-    
-    riveHelpers.resizeCanvas(canvas, container, false);
 
     //keep access to these elements
     loaderCanvas = canvas;
     loaderContainer = container;
+
+    //resize the canvas
+    riveHelpers.resizeCanvas(canvas, container, false);
 });
 
 //start the loading sequence
