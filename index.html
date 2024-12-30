@@ -22,8 +22,8 @@
         <div class="sliders">
             <label for="loadTime">Loading time</label>
             <div class="slider">
-                <input type="range" id="loadTime" min="300" max="10000" value="1000"/>
-                <span id="loadTimeValue" class="slider-value">1000</span>
+                <input type="range" id="loadTime" min="1000" max="10000" value="4000"/>
+                <span id="loadTimeValue" class="slider-value">4000</span>
             </div>
         </div>
         <!-- Button used to start the loader -->
@@ -46,11 +46,16 @@
     </div> old loader-->
 
     <!-- Loader elements -->
+    <div class="load-bg blur" id="blur"></div>
+    
     <div id="load-bg" class="panel">
         <div class="load-header" id="load-header">Preparing your file...</div>
+        <div class="load-subheading">This will only take a moment</div>
         <div id="rive-container"></div>
-        <div class="progress-bar-container"></div>>
+        <div id="progress-bar-container"></div>
+        <button id="cancel" class="btn secondary">Cancel</button>
     </div>
+
 
     <script src="https://unpkg.com/@rive-app/canvas@2.9.1"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>

@@ -4,41 +4,69 @@ import * as loadControls from './controls.js';
 //rive parameters, centralised
 const currSrc = "./assets/demo_1.riv";
 const currStateMachines = "load";
+const progressBarSrc = "./assets/progress_bar.riv";
+const progressBarStateMachines = "progress";
 
 //global parameters 
 const scale = 2;
 let loaderCanvas;
 let loaderContainer;
+let progressBarCanvas;
+let progressBarContainer;
 
 //interactive elements
 const loadButton = document.getElementById("load-button");
 const loadBg = document.getElementById("load-bg");
+const blur = document.getElementById("blur");
 
 // Wait for the Rive library to load before executing
 document.addEventListener('DOMContentLoaded', () => {    
-    // Create canvasses where the rive assets will be displayed on
+    // Create canvas where the rive asset will be displayed on
     let container = document.getElementById('rive-container');
+    let canvas = createCanvas(container);
+    //keep access to these elements
+    loaderContainer = container;
+    loaderCanvas = canvas;
+
+    // Create canvas where the rive asset will be displayed on, again
+    container = document.getElementById('progress-bar-container');
+    canvas = createCanvas(container);
+    progressBarContainer = container;
+    progressBarCanvas = canvas;
+    //NOTE: GOING TO NEED TO MAKE THE "DESIRED SIZE" BOTH VARIABLE AND TWO DIFFERENT PARAMETERS (W & H)
+});
+
+function createCanvas(container){
     let canvas = document.createElement('canvas');
     canvas.classList.add("canvas");
     container.appendChild(canvas);
 
-    //keep access to these elements
-    loaderCanvas = canvas;
-    loaderContainer = container;
-
-    //resize the canvas
-    riveHelpers.resizeCanvas(canvas, container, false);
-});
+    return canvas;
+}
 
 //start the loading sequence
 loadButton.onclick = (() => {
     //display background and other loading elements
     loadBg.classList.add("visible");
+    blur.classList.add("visible");
 
-    let loaderInstance = riveHelpers.createRiveInstance(currSrc, loaderCanvas, currStateMachines, loaderContainer);
+    let loaderInstance = riveHelpers.createRiveInstance(
+        currSrc, 
+        loaderCanvas, 
+        currStateMachines, 
+        400
+    );
+
+    let progressBarInstance = riveHelpers.createRiveInstance(
+        progressBarSrc, 
+        progressBarCanvas, 
+        progressBarStateMachines,
+        400,
+        setProgressBarMilestones
+    );
 
     //end loading screen after some time
-    setTimeout(() => {
+    const endTimeout = setTimeout(() => {
         //trigger end animation
         // Get the inputs via the name of the state machine
         const inputs = loaderInstance.stateMachineInputs(currStateMachines);
@@ -47,8 +75,49 @@ loadButton.onclick = (() => {
         //trigger event
         endTrigger.fire();
         //hide loadscreen after above animation is over
-        setTimeout(() => loadBg.classList.remove("visible"), 100);
-    }, parseInt(loadControls.controls.loadTime.value));
+        setTimeout(() => {
+            loadBg.classList.remove("visible");
+            blur.classList.remove("visible")
+        }, 100);
+    }, loadControls.controls.loadTime.value);
+
+    //set up cancel button
+    const cancelButton = document.getElementById("cancel");
+    cancelButton.addEventListener("click", ()=> {
+        //cancel other timeout
+        clearTimeout(endTimeout);
+        //trigger end animation
+        // Get the inputs via the name of the state machine
+        const inputs = loaderInstance.stateMachineInputs(currStateMachines);
+        // Find the input to trigger
+        const endTrigger = inputs.find(i => i.name === 'end');
+        //trigger event
+        endTrigger.fire();
+        //hide loadscreen after above animation is over
+        setTimeout(() => {
+            loadBg.classList.remove("visible");
+            blur.classList.remove("visible")
+        }, 100);
+    });
 })
 
 loadControls.controls.loadTime.addEventListener('input', loadControls.updateDisplay);
+
+function setProgressBarMilestones(inputs){
+    // Find the specific milestone input
+    const milestoneInput = inputs.find(input => input.name === 'milestone');
+    if (!milestoneInput) {
+        console.error("Input 'milestone' not found.");
+        return;
+    }
+    milestoneInput.value = 0;
+
+    //set times for progress milestones to be called
+    const waitTime = parseInt(loadControls.controls.loadTime.value);
+    const MILESTONES = 3;
+    for (let i = MILESTONES; i > 0; i--){
+        setTimeout(() => {
+            milestoneInput.value++;
+        }, (waitTime/i)-300);
+    }
+}

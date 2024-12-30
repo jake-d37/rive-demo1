@@ -1,5 +1,5 @@
 //returns a new rive instance that cleans up itself when done
-export function createRiveInstance(src, canvas, stateMachines, canvasContainer) {
+export function createRiveInstance(src, canvas, stateMachines, desiredSideLength, riveInputFunc) {
     // Initialize the Rive instance
     const r = new rive.Rive({
         src: src,
@@ -7,11 +7,12 @@ export function createRiveInstance(src, canvas, stateMachines, canvasContainer) 
         autoplay: true,
         stateMachines: stateMachines,
         onLoad: () => {
-            console.log("Rive instance loaded");
+            if (riveInputFunc){
+                const inputs = r.stateMachineInputs(stateMachines);
+                riveInputFunc(inputs);
+            }
         },
     });
-
-    resizeCanvas(canvas, canvasContainer, r)
 
     //check when animation over to call the cleanup
     r.on('stop', () => {
@@ -19,32 +20,26 @@ export function createRiveInstance(src, canvas, stateMachines, canvasContainer) 
         console.log("Animation stopped and cleaned up!");
     });
 
-    // Resize the canvas on page load and window resize
-    window.addEventListener('resize', () => resizeCanvas(canvas, canvasContainer, r));
+    // Resize the canvas on window resize
+    window.addEventListener('resize', () => resizeCanvas(canvas, r, desiredSideLength));
+    //and initially
+    resizeCanvas(canvas, r, desiredSideLength);
 
     return r;
 }
 
 //resizes canvas and rive element to window
-export function resizeCanvas(canvas, container, riveInstance){
-    //resize parent
-    /*if (container) {
-        //THIS WILL DO THE ENTIRE SCREEN
-        container.width = window.innerWidth;
-        container.height = window.innerHeight;
-    }*/
+export function resizeCanvas(canvas, riveInstance, desiredSideLength){
 
     //resize canvas itself
     if (canvas){
-        const desiredSideLength = 401;
-        const scale = 5; //ensures canvas isn't pixelated
+        const scale = 15; //ensures canvas isn't pixelated
         canvas.width = desiredSideLength * scale;
         canvas.height = desiredSideLength * scale;
-        console.log(`w:${canvas.width}, h:${canvas.height}`);
     }
 
     //resize rive instance
-    if (riveInstance){
-        riveInstance.resizeToCanvas();
+    if (riveInstance) {
+        riveInstance.resizeToCanvas(); // Ensure the instance adjusts to the new canvas size
     }
 }

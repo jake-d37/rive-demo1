@@ -19,7 +19,7 @@
     background-color: hsla(264, 59%, 43%, 1.0);
 }
 
-.load-bg {
+.blur {
     visibility: hidden;
     opacity: 0;
     display: flex;
@@ -34,7 +34,7 @@
     height: 100vh;
     position: absolute;
     background-color: #0e12169f;
-    z-index: 9999;
+    z-index: 10;
 
     backdrop-filter: blur(0rem);
     transition: background-color 0.3s ease;
@@ -42,10 +42,29 @@
 }
 
 /* Make sure that when visible, opacity is 1 and visibility is set to visible */
-.load-bg.visible {
+.blur.visible {
     visibility: visible;
     opacity: 1;
     backdrop-filter: blur(1.5rem);
+}
+
+.btn.secondary {
+    font-family: "Canva Sans";
+    font-size: 1rem;
+    color: hsla(207, 26%, 7%, 0.86);
+    padding: 0.5rem 2rem;
+    margin: 2rem;
+    background-color: white;
+    border-radius: 4px;
+    border: 1px solid hsla(211, 26%, 28%, 0.20);
+
+    transition: all 0.25s ease-in-out;
+}
+
+.btn.secondary:hover {
+    font-family: "Canva Sans";
+    background-color: hsla(228, 20%, 95%, 1.0);
+    border: 1px solid hsla(207, 26%, 15%, 0.50);
 }
 
 .panel {
@@ -56,35 +75,36 @@
 
     position: absolute;
     top: 86px;
-    left: -10px;
+    width: 450px;
 
     /*will smoothly transition when visible*/
-    width: 0px; 
+    left: -200px; 
     opacity: 0;
     
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
     z-index: 20;
-    border-radius: 12px;
+    border-radius: 0px 12px 12px 0px;
     padding: 2px 4px;
     background-color: #fff;
-    overflow: auto;
+    overflow: hidden;
     height:calc(100vh - 150px);
 
-    transition: width 0.25s ease-out, left 0.25s ease-out, opacity 0.25s ease-out;
+    transition: left 0.25s ease-out, opacity 0.25s ease-out;
 }
 
 .panel.visible {
-    left: -5px;
-    width: 400px;
+    left: 0px;
     opacity: 1;
 }
 
 .load-header {
-    margin: 2rem;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0.5rem;
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: 1000;
+}
+
+.load-subheading{
+    color: hsla(207, 26%, 7%, 0.70);
 }
 
 .canvas {
@@ -92,8 +112,6 @@
     height: 100%;
 
     object-fit: cover;
-
-    border: solid 1px red;
 }
 
 #rive-container {
@@ -110,13 +128,14 @@
     height: 50vw;
     ^^old version*/
 
-    width: 50%;
-    height: 25%;
-
+    width: 100%;
+    height: 30%;
+ 
+    margin: 2rem;
     z-index: 100;
+}
 
-    margin: 0px;
-    padding: 0px;
-
-    border: solid 1px blue;
+#progress-bar-container {
+    width: 250px;
+    height: 25px;
 }
