@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas = createCanvas(container);
     progressBarContainer = container;
     progressBarCanvas = canvas;
-    //NOTE: GOING TO NEED TO MAKE THE "DESIRED SIZE" BOTH VARIABLE AND TWO DIFFERENT PARAMETERS (W & H)
 });
 
 function createCanvas(container){
