@@ -57,12 +57,38 @@ loadButton.onclick = (() => {
         400
     );
 
+    //set up cursor tracking on the loader
+    const boundingBox = loaderCanvas.getBoundingClientRect();
+    const cursorXInput = loaderInstance.stateMachineInputs.find(input => input.name === "LtoR");
+    const cursorYInput = loaderInstance.stateMachineInputs.find(input => input.name === "UtoD");
+    //update whenever the mouse moves
+    document.addEventListener("mousemove", (event) => {
+        //get the position of the cursor relative to the canvas
+        normalisedPosition = riveHelpers.trackCursor(event, boundingBox);
+        //apply values to the inputs in rive object so animation follows
+        if (normalisedPosition){
+            if (cursorXInput) {
+                cursorXInput = normalisedPosition.x;
+            } else {
+                console.warning("No left to right input found in rive object");
+            }
+            if (cursorYInput) {
+                cursorYInput = normalisedPosition.y;
+            } else {
+                console.warning("No up to down input found in rive object");
+            }
+        } else {
+            console.warning("No cursor position found");
+        }
+    });
+
+    //not referenced again but named for readability
     let progressBarInstance = riveHelpers.createRiveInstance(
         progressBarSrc, 
         progressBarCanvas, 
         progressBarStateMachines,
         400,
-        setProgressBarMilestones
+        setProgressBarMilestones //on load function (optional)
     );
 
     //end loading screen after some time
